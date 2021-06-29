@@ -1,0 +1,135 @@
+﻿@model Dashboards_Web.Models.StatusModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-success {
+        color: #fff;
+        background-color: #607d8b;
+        border-color: #607d8b;
+    }
+
+    .btn-onmouseover {
+        background-color: #607d8b;
+    }
+
+    .col-lg-3 {
+        width: 20%;
+    }
+
+    .info th {
+        background: #607d8b !important;
+    }
+
+        .info th a {
+            color: white;
+            font-weight: bold;
+            font-size: medium;
+        }
+
+    .webgrid-footer {
+        background: #607d8b;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: medium;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .runStyle {
+        color: green;
+        font-weight: bold;
+    }
+
+    .stopStyle {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+@using (Html.BeginForm("ServiceStatus", "ServiceStatus", FormMethod.Get))
+{
+    <meta http-equiv="refresh" content="180">
+    <div class="row" style="align-content:center">
+        <div class="col-sm-11">
+            <table class="table table-bordered table-hover" style="text-align:center;">
+                <thead class="info" style="color:#607d8b;text-align:center !important;font-size:18px;">
+                    <tr>
+                        <th style="margin-right:4px;background-color:white !important">Total Forests: @ViewBag.TotalForest</th>
+                        <th style="background-color:white !important">Total Machines: @ViewBag.TotalMachine</th>
+                        <th style="color:forestgreen;background-color:white !important">Running: @ViewBag.MachinesRunning</th>
+                        <th style="color:orangered;background-color:white !important">Stopped: @ViewBag.StopedCount </th>
+                        <th style="color:orangered;background-color:white !important">StopPending: @ViewBag.StopPendingCount</th>
+                        <th style="color:orangered;background-color:white !important">StartPending: @ViewBag.StartPending</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:8px;">
+
+        <div class="form-horizontal">
+            <div class="col-lg-3">
+                @Html.TextBoxFor(m => m.ForestName, new { @class = "form-control", @placeholder = "Forest Name", @autocomplete = "off" })
+            </div>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(m => m.Machine, new { @class = "form-control", @placeholder = "Machine", @autocomplete = "off" })
+            </div>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(m => m.Status, new { @class = "form-control", @placeholder = "Status", @autocomplete = "off" })
+
+            </div>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(m => m.ServiceName, new { @class = "form-control", @placeholder = "Rtc Prov", @autocomplete = "off", @readonly = "readonly" })
+
+            </div>
+            <div class="col-lg-3">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top:10px;">
+        @{
+            var grid = new WebGrid(
+                                canPage: true,
+                                rowsPerPage: Model.PageSize,
+                                canSort: true,
+                                ajaxUpdateContainerId: "grid");
+
+            grid.Bind(Model.Machines, rowCount: Model.TotalRecords, autoSortAndPage: false);
+            grid.Pager(WebGridPagerModes.All);
+
+            @grid.GetHtml(htmlAttributes: new { id = "grid" },
+                    fillEmptyRows: false,
+                    tableStyle: "table table-bordered table-hover",
+                    mode: WebGridPagerModes.All,
+                    headerStyle: "info",
+                    footerStyle: "webgrid-footer",
+                    columns: grid.Columns(
+                         grid.Column("ForestName", "Forest Name"),
+                         grid.Column("Machine", "Machine"),
+                         grid.Column("PoolFqdn", "Pool FQDN"),
+                         grid.Column("Role", "Role"),
+                         grid.Column("ServiceName", "Service Name"),
+                         grid.Column("LastUpdatedDate", "Last Updated Date"),
+                         grid.Column("LastUpdatedValue", "Value"),
+                         grid.Column("EvaluatedResult", "Evaluated Result"),
+                         grid.Column("Status", format: item => Html.Raw("<span" + (item.Status == "Running" ? " class='runStyle'" : " class='stopStyle'") + ">" + item.Status + "</span>"))
+                         )
+                    );
+        }
+    </div>
+
+    }
+
+
+

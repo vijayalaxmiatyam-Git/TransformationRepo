@@ -1,0 +1,391 @@
+﻿@model List<Dashboards_Web.Models.OnBoardModel>
+@{
+    ViewBag.Title = "Service OnBoard";
+}
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link href="~/Content/LoadSpin.css" rel="stylesheet" />
+<style>
+    .customDropDown {
+        color: #fff !important;
+        background-color: #607d8b !important;
+        text-align: center;
+        font-size: 14px;
+        height: 35px;
+        /*font-weight: bold;*/
+    }
+
+    .rowBorder {
+        border: 2px solid #337ab7;
+        border-radius: 2px;
+        padding: 2px;
+    }
+
+    .info th {
+        background: #607d8b !important;
+    }
+
+        .info th a {
+            color: white;
+            font-weight: bold;
+            font-size: medium;
+        }
+
+    .info th {
+        color: white;
+        font-weight: bold;
+        font-size: medium;
+    }
+
+    .webgrid-footer {
+        background: #607d8b;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: medium;
+    }
+
+    .divScroll {
+        overflow-y: auto;
+        background-color: white;
+        max-height: 560px;
+        text-align: justify;
+    }
+
+    .container {
+        width: 1180px;
+        /*margin-top: 3em;*/
+    }
+
+    #accordion .panel {
+        border-radius: 0;
+        border: 0;
+        margin-top: 0px;
+    }
+
+    /*#accordion a {
+        display: block;
+        padding: 10px 15px;
+        border-bottom: 1px solid #b42b2b;
+        text-decoration: none;
+    }*/
+
+    #accordion .panel-heading a.collapsed:hover,
+    #accordion .panel-heading a.collapsed:focus {
+        background-color: #607d8b;
+        color: white;
+        transition: all 0.2s ease-in;
+    }
+
+        #accordion .panel-heading a.collapsed:hover::before,
+        #accordion .panel-heading a.collapsed:focus::before {
+            color: white;
+        }
+
+    #accordion .panel-heading {
+        padding: 0;
+        border-radius: 0px;
+        text-align: center;
+    }
+
+        #accordion .panel-heading a:not(.collapsed) {
+            color: white;
+            background-color: #607d8b;
+            transition: all 0.2s ease-in;
+        }
+
+        /* Add Indicator fontawesome icon to the left */
+        #accordion .panel-heading .accordion-toggle::before {
+            font-family: 'FontAwesome';
+            content: '\f00d';
+            float: left;
+            color: white;
+            font-weight: lighter;
+            transform: rotate(0deg);
+            transition: all 0.2s ease-in;
+        }
+
+        #accordion .panel-heading .accordion-toggle.collapsed::before {
+            color: #444;
+            transform: rotate(-135deg);
+            transition: all 0.2s ease-in;
+        }
+</style>
+<script>
+
+    $(document).ready(function () {
+        $("#btnModal").click(function () {
+            $("#lblError").text("");
+            $("#myModal").modal('show');
+        });
+        $("#myModal").on('hide.bs.modal', function () {
+            window.location.reload();
+        });
+        $("#btnModal1").click(function () {
+            $("#lbltskError").text("");
+            $("#myModal1").modal('show');
+        });
+        $("#myModal1").on('hide.bs.modal', function () {
+            window.location.reload();
+        });
+        $('input[type="checkbox"]').change(function (event) {
+
+            if ($("#name :selected").val() != null && $("#txtsOwner").val() != null && $(this).is(":checked")) {
+
+                document.getElementById('btnOnboard').disabled = false;
+            }
+            else {
+                document.getElementById('btnOnboard').disabled = true;
+            }
+        });
+        $("#tasksbmt").click(function () {
+            if ($("#txttaskName").val() == null || $("#txttaskName").val() == "") {
+                $("#lbltskError").text("Enter valid service task name");
+                return;
+            }
+            if ($("#txtsubTask").val() == null || $("#txtsubTask").val() == "") {
+                $("#lbltskError").text("Enter valid sub tasks");
+                return;
+            }
+            $("#lbltskError").text("");
+
+            var taskName = $("#txttaskName").val();
+            var subTask = $("#txtsubTask").val();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("InsertServiceTaskData", "OnBoardingVSO")',
+                    data: { taskName: taskName, subTask: subTask },
+                    dataType: "json",
+                    success: function () {
+                        $("#lbltskSuccess").text("Task got added successfully");
+                    },
+                    error: function (ex) {
+                        var r = jQuery.parseJSON(ex.responseText);
+                        alert(ex.responseText);
+                    }
+                });
+        });
+        $("#btnOnboard").click(function () {
+            if (window.confirm("Would you like to create VSO service task?")) {
+                var param = $("#name :selected").val();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetServiceVSOData", "OnBoardingVSO")',
+                    data: { param: param },
+                    dataType: "json",
+                    success: function () {
+                        alert("Service task created successfully and data saved successfully");
+                        window.location.href = '/OnBoardingVSO/OnBoardingService';
+                    },
+                    error: function (ex) {
+                        var r = jQuery.parseJSON(ex.responseText);
+                        alert(ex.responseText);
+                    }
+                });
+            }
+            else {
+                alert("Data saved successfully");
+            }
+        });
+
+        $("#sbmt").click(function () {
+            if ($("#txtAddName").val() != null && $("#txtAddName").val() != "") {
+                var param = $("#txtAddName").val();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("InsertServiceName", "OnBoardingVSO")',
+                    data: { param: param },
+                    dataType: "json",
+                    success: function () {
+                        $("#lblSuccess").text("Service name got added successfully");
+                    },
+                    error: function (ex) {
+                        var r = jQuery.parseJSON(ex.responseText);
+                        alert(ex.responseText);
+                    }
+                });
+            }
+            else {
+                $("#lblError").text("Enter valid service name");
+                return;
+            }
+        });
+    });
+</script>
+<table>
+    <tr>
+        <td>
+            <button type="button" class="btn btn-link" data-target="#myModal" id="btnModal" title="To add new service name into list">
+                Add Service Name
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Service Name</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label style="color:black;font-weight:bold;font-size:medium">*Service Name</label>
+                                    <input type="text" name="name" id="txtAddName" value="" class="form-control" autocomplete="off" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="button" value="Submit" id="sbmt" class="btn btn-success" style="background-color:#607d8b" />
+                                </div>
+
+                                <label id="lblError" class="alert-danger"></label>
+                                <label id="lblSuccess" class="alert-success"></label>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <button type="button" class="btn btn-link" data-target="#myModal1" id="btnModal1" title="To add new service task into list">
+                Add Service Tasks
+            </button>
+            @*Modal*@
+            <div class="modal fade" id="myModal1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Service Tasks</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label style="color:black;font-weight:bold;font-size:medium">*Service Task Name</label>
+                                    <input type="text" name="name" id="txttaskName" value="" class="form-control" autocomplete="off" />
+                                </div>
+                                <div class="form-group">
+                                    <label style="color:black;font-weight:bold;font-size:medium">*Service Sub Tasks</label>
+                                    <textarea id="txtsubTask" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="button" value="Submit" id="tasksbmt" class="btn btn-success" style="background-color:#607d8b" />
+                                </div>
+
+                                <label id="lbltskError" class="alert-danger"></label>
+                                <label id="lbltskSuccess" class="alert-success"></label>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+@using (Html.BeginForm("ServiceOnBoard", "OnBoarding", FormMethod.Get, new { @name = "Form1" }))
+{
+    <div class="container-fluid">
+
+        <div class="container-fluid" style="padding: 0%;margin-bottom:1%;">
+            <div class="row">
+                <table style="align-content:center">
+                    <tr>
+                        <td style="color:black;font-weight:bold;font-size:medium">*Service Name:</td>
+                        <td>
+                            @*@Html.DropDownList("name", new List<SelectListItem>
+                                {
+                                new SelectListItem{ Text="UserMoves", Value = "UserMoves" },
+                                new SelectListItem{ Text="Mindtree Delivery Team", Value = "Mindtree Delivery Team" },
+                                new SelectListItem{ Text="LROS", Value = "LROS" },
+                                new SelectListItem{ Text="BVD", Value = "BVD" },
+                                new SelectListItem{ Text="IC3", Value = "IC3" },
+                                }, new { @class = "btn dropdown-toggle customDropDown" })*@
+
+                            @Html.DropDownList("name", (IEnumerable<SelectListItem>)ViewBag.ServiceName, new { @class = "form-control", @style = "background: #607d8b;color: white;" })
+                        </td>
+                        <td style="color:black;font-weight:bold;font-size:medium;padding-left:15px;">*Service Owner:</td>
+                        <td>
+                            <input type="text" name="sOwner" id="txtsOwner" class="form-control" style="width:80%" autocomplete="off" />
+                        </td>
+
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="row">
+
+                @*<table class="table table-bordered table-hover" style="text-align:center;">
+                        <thead class="info" style="color:white;text-align:center !important;font-size:18px;">
+                            <tr>
+                                <th style="margin-right:4px">Total : @Model.Count()</th>
+                                <th>SBV Voice Apps : @Model.Count(a => a.OwningTeam.Equals("SBVVoiceApplications"))</th>
+                                <th>BV PSTN Calling : @Model.Count(a => a.OwningTeam.Equals("BusinessVoicePSTNCalling"))</th>
+                                <th>Business Voice LIS : @Model.Count(a => a.OwningTeam.Equals("BusinessVoiceLIS"))</th>
+                            </tr>
+                        </thead>
+                    </table>*@
+            </div>
+            <div class="row rowBorder" id="rowDiv">
+                <div class="col-sm-12" style="padding:0;margin:0;">
+
+                    <div class="divScroll">
+                        @{
+                            var gridOb = new WebGrid(
+                                                canPage: false,
+                                                canSort: false
+                                                );
+
+                            gridOb.Bind(Model.ToList(), autoSortAndPage: false);
+
+                            @gridOb.GetHtml(htmlAttributes: new { id = "gridOnBoard" },
+                                                                       fillEmptyRows: false,
+                                                                       tableStyle: "table table-bordered table-hover",
+                                                                       mode: WebGridPagerModes.All,
+                                                                       headerStyle: "info",
+                                                                       footerStyle: "webgrid-footer",
+                                                                       columns: gridOb.Columns(
+gridOb.Column("IncludeTask", "Include Task", format:@<text><input type="checkbox" id="includeTask" class="custom-control-input" /></text>),
+gridOb.Column("TaskName", "Task Name"),
+gridOb.Column("SubTasks", format: (item) =>
+{
+string review = item.SubTasks ?? "";
+return new HtmlString(review.Replace("\r\n", "<br/>"));
+}),
+gridOb.Column("TargetDate", "Target Date", format:@<text><input type="date" id="txtDate" class="form-control" /></text>)
+@*gridOb.Column("TaskOwner", "Task Owner", format:@<text><input type="text" id="txtOwner" class="form-control" /></text>)*@
+)
+)}
+
+                    </div>
+                </div>
+            </div>
+            <div class="center">
+                <div id="cover-spin"></div>
+            </div>
+            <br />
+            <div>
+                <input type="button" disabled="disabled" id="btnOnboard" value="Submit" class="btn btn-success" style="background-color:#607d8b" />
+            </div>
+        }
+
+
+        else
+        {
+            if (Model == null)
+            {
+                <div style="font-size:medium;color:red;text-align:center;"> <marquee direction="right">No data is available.</marquee></div>
+
+            }
+            else
+            {
+                <div style="font-size:medium;color:red;text-align:center;"> <marquee direction="right">No data available.</marquee></div>
+            }
+        }
+    </div>
+}

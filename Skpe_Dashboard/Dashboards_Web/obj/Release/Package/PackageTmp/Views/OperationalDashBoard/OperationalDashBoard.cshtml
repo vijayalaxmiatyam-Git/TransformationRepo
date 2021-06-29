@@ -1,0 +1,358 @@
+﻿@model Dashboards_Web.Models.SFBDataModel
+@{
+    ViewBag.Title = "Operational DashBoard";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<style>
+    .row {
+        padding: 0%;
+        margin: 0%;
+    }
+
+    .col {
+        padding: 0%;
+        margin: 0%;
+    }
+
+    .searchContainer {
+        padding: .5%;
+    }
+
+    .colPaddingLeftAndRight {
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+
+    .colPaddingLeftAndRightWithRightMargin {
+        padding-left: 0%;
+        padding-right: 0%;
+        margin-right: 2.7%
+    }
+
+    .rowImageContainer {
+        margin-top: .5%;
+    }
+
+    .imageConatinerCols {
+        padding: .25%;
+    }
+
+    .imageContainer {
+        padding: 0%;
+    }
+
+    td {
+        padding-right: 4px;
+        width: 20%;
+    }
+
+    .titleText {
+        font-size: 12px;
+        font-weight: bold;
+        padding: 4px;
+        background-color: whitesmoke;
+        color: #337ab7;
+        overflow-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+
+        .titleText:hover {
+            font-size: 14px;
+            -webkit-line-clamp: 10; /* number of lines to show */
+            -webkit-box-orient: vertical;
+        }
+
+    .descText {
+        font-size: 12px;
+        padding: 3px;
+        background-color: goldenrod;
+        overflow-wrap: break-word;
+        color: black;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+
+        .descText:hover {
+            background-color: darkgoldenrod;
+            -webkit-line-clamp: 10; /* number of lines to show */
+        }
+
+    .titleDesc {
+        margin: 0px;
+    }
+
+    .navText {
+        font-size: 28px;
+    }
+
+    .commontoolsopheading {
+        background-color: black;
+        padding: 2px;
+        margin: 5px;
+        text-align: center;
+        color: white;
+        font-size: 16px;
+        border: 3px solid darkgrey;
+        border-radius: 50%;
+    }
+
+    .sopheading {
+        margin-top: 10px;
+    }
+
+    .dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
+        background-color: #607d8b;
+        font-weight: bold;
+        border-color: #607d8b;
+    }
+
+    .btn-primary, .btn-primary:hover, open > .dropdown-toggle.btn-primary:hover {
+        background-color: #607d8b;
+        font-weight: bold;
+    }
+
+    input[type=checkbox] {
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+    }
+</style>
+<script>
+        $(document).ready(function () {
+            $("#btnModal").click(function () {
+                ChangeModalDropDown();
+                $("#lblError").text("");
+                $("#myModal").modal('show');
+
+            });
+
+            $("#myModal").on('hide.bs.modal', function () {
+                window.location.reload();
+            });
+
+            $("#editModal").on('hide.bs.modal', function () {
+                window.location.reload();
+            });
+
+            $("#sbmt").click(function () {
+                var category = $("#selModalDropdownCategory :selected").val();
+                var track = $("#ModalTrack :selected").val();
+                var type = $("#dropdownType :selected").val();
+                var freqUsed = $("#dropdownModalFreqUsed :selected").val();
+                $("#lblError").text("");
+                if ($("#Link").val() == "" || $("#Link").val() == null) {
+                    $("#lblError").text("Enter link url");
+                    return;
+                }
+                if ($("#FriendlyName").val() == "" || $("#FriendlyName").val() == null) {
+                    $("#lblError").text("Enter friendly name");
+                    return;
+                }
+                if ($("#Description").val() == "" || $("#Description").val() == null) {
+                    $("#lblError").text("Enter description");
+                    return;
+                }
+
+                var modelData = { FriendlyName: $("#FriendlyName").val(), Description: $("#Description").val(), Link: $("#Link").val(), Category: category, ModalTrack: track, FrequentlyUsed: freqUsed, LinkType: type };
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '@(Url.Action("SFBLibraryPost","OperationalDashBoard"))',
+                data: JSON.stringify(modelData),
+                success: function (message) {
+
+                    if (message.success) {
+                        $("#lblError").text(message.responseText);
+                    }
+                    else {
+                        $("#FriendlyName").val('');
+                        $("#Description").val('');
+                        $("#Link").val('');
+                        $("#lblSuccess").text(message.responseText);
+                    }
+                },
+                error: function () {
+
+                }
+            });
+            });
+            FrequentlyUsedSelect();
+        });
+
+    function ChangeModalDropDown() {
+
+        var categoryId = $("#selModalDropdownCategory :selected").val();
+        $.ajax({
+            url: '/OperationalDashBoard/GetTrackByCategory',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: { categoryId: categoryId },
+            success: function (data) {
+                $("#ModalTrack").html('');
+                $.each(data, function (i, data) {
+                    $('<option>',
+                        {
+                            value: data.Id,
+                            text: data.Name
+                        }).html(data.Name).appendTo("#ModalTrack");
+                });
+                $("#trackDiv").show();
+            },
+            error: function (xhr, status) {
+            }
+        });
+    }
+</script>
+<div class="container-fluid">
+    <div class="container searchContainer" style="padding: 0%;margin-bottom:2%">
+        <div class="row">
+            <table style="width:100%">
+                <tr>
+                    <td>
+
+                        @Html.DropDownList("sortSfbdropdown", new List<SelectListItem>
+                                                    {
+                                                    new SelectListItem{ Text="Sort By", Value = "select" },
+                                                    new SelectListItem{ Text="Ascending", Value = "Asc" },
+                                                    new SelectListItem{ Text="Descending", Value = "Desc"}
+                                                    }, new { @class = "form-control", @onchange = "SortSfbLinkData()", @style = "background: #607d8b;color: white;" })
+                    </td>
+                    <td>
+                        @Html.DropDownList("dropdownFreqUsed", (IEnumerable<SelectListItem>)ViewBag.FreqUsedType, new { @class = "form-control", @onchange = "FrequentlyUsedSelect()", @style = "background: #607d8b;color: white;" })
+                    </td>
+                    <td>
+                        @Html.DropDownList("selDropdownCategory", (IEnumerable<SelectListItem>)ViewBag.CategoryList, "Select Category", new { @class = "form-control", @onchange = "ChangeDropDown()", @style = "background: #607d8b;color: white;" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.Track, Enumerable.Empty<SelectListItem>(), "Select Track", new { @class = "form-control", @onchange = "GetDetailsByCategoryTrack()", @disabled = "true", @style = "background: #607d8b;color: white;" })
+                    </td>
+                    <td>
+                        <div class="serachDiv">
+                            <input type="text" id="searchLinkName" onkeyup="searchSfbLinks()" class="form-control serachInputFiled" placeholder="Search by name.." title="Type in a name">
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning" data-target="#myModal" id="btnModal" title="Add SFB link data" style="background-color:#607d8b;color:white;">
+                            Add
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container imageContainer" id="linksContainer">
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add SFB Links</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Link, new { @class = "form-control", @placeholder = "Link*", @autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.Link)
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.FriendlyName, new { @class = "form-control", @placeholder = "Friendly Name*", @autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.FriendlyName)
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @placeholder = "Description*", @autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.Description)
+                    </div>
+                    <div class="form-group">
+                        Select Category
+                        <div>
+                            @Html.DropDownList("selModalDropdownCategory", (IEnumerable<SelectListItem>)ViewBag.CategoryList, new { @class = "form-control", @onchange = "ChangeModalDropDown()" })
+                        </div>
+                    </div>
+                    <div class="form-group" id="trackDiv" style="display:none;">
+                        Select Track
+                        <div>
+                            @Html.DropDownListFor(model => model.ModalTrack, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div id="linkType">
+                            Select Link Type
+                            @Html.DropDownList("dropdownType", (IEnumerable<SelectListItem>)ViewBag.LinkType, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            @Html.CheckBox("IsFrequentlyUsed", Model.IsFrequentlyUsed)
+                            Is Frequently Used
+                        </div>*@
+                    <div class="form-group">
+                        <div id="freqUsed">
+                            Select frequently used
+                            @Html.DropDownList("dropdownModalFreqUsed", (IEnumerable<SelectListItem>)ViewBag.FreqUsedType, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Submit" id="sbmt" class="btn btn-success" style="background-color:#607d8b" />
+                    </div>
+
+                    <label id="lblError" class="alert-danger"></label>
+                    <label id="lblSuccess" class="alert-success"></label>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal for edit-->
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="modTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        @Html.Hidden("editLinkId", null)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Link Name")
+                        @Html.TextBox("editName", null, new { @class = "form-control", @autocomplete = "off", @disabled = "disabled" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Link")
+                        @Html.TextBox("editLink", null, new { @class = "form-control", @placeholder = "Link*", @autocomplete = "off" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Description")
+                        @Html.TextArea("editDescription", null, new { @class = "form-control", @placeholder = "Description*", @autocomplete = "off" })
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Submit" id="editSbmt" onclick="UpdateSFBData()" class="btn btn-success" style="background-color:#607d8b" />
+                    </div>
+                    <label id="lblEditError" class="alert-danger" hidden="hidden"></label>
+                    <label id="lblEditSuccess" class="alert-success" hidden="hidden"></label>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/Scripts/OpDashboard.js"></script>

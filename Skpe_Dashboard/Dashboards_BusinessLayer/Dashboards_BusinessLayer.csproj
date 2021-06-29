@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Kusto.Data" Version="9.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dashboards_DataLayer\Dashboards_DataLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Cloud.Metrics.Client">
+      <HintPath>..\packages\Microsoft.Cloud.Metrics.Client.2.2020.602.1739\lib\net45\Microsoft.Cloud.Metrics.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Online.Metrics.Serialization">
+      <HintPath>..\packages\Microsoft.Cloud.Metrics.Client.2.2020.602.1739\lib\net45\Microsoft.Online.Metrics.Serialization.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+ 
+
+</Project>

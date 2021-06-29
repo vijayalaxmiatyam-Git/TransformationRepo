@@ -1,0 +1,7 @@
+﻿let start= datetime(@FromDate); 
+let end= datetime(@ToDate);
+Incidents
+| where Title has 'E911 Call for information ON' and OwningTeamName =='SKYPEFORBUSINESS\\Triage' and OwningTenantName =='Skype For Business'//IncidentId =='226347717' and 
+| summarize arg_max(Lens_IngestionTime ,*) by IncidentId | order by IncidentId desc
+| project IncidentId,Title,CreateDate,OwningTeamId,OwningTeamName,OwningTenantId,OwningTenantName,ModifiedDate,Status,OwningContactAlias,Severity
+| where CreateDate >= start and CreateDate <= end

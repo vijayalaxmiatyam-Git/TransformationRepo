@@ -1,0 +1,259 @@
+﻿@model Dashboards_Web.Models.Ic3EdgeModel
+@{
+    ViewBag.Title = "Ic3 Test Update";
+}
+<style>
+
+    .customDropDown {
+        color: #fff !important;
+        background-color: #607d8b !important;
+        text-align: center;
+        font-size: 16px;
+        height: 35px;
+        font-weight: bold;
+    }
+
+    .Myspan {
+        margin-right: 4px;
+        margin-left: 3px;
+        font-size: 16px;
+        color: #607d8b;
+        font-weight: bold;
+    }
+
+    input[type=checkbox] {
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+    }
+
+    th {
+        padding-right: 10px;
+    }
+
+    .divScroll {
+        overflow-y: auto;
+        background-color: white;
+        max-height: 600px;
+        text-align: justify;
+    }
+
+    .tblHeading {
+        background-color: darkslategray;
+        color: whitesmoke;
+    }
+
+    .divScrollTta {
+        overflow-y: auto;
+        background-color: white;
+        max-height: 500px;
+        text-align: justify;
+    }
+
+    .info th {
+        background: #607d8b !important;
+    }
+
+        .info th a {
+            color: white;
+            font-weight: bold;
+            font-size: medium;
+        }
+
+    .info th {
+        color: white;
+        font-weight: bold;
+        font-size: medium;
+    }
+
+    .webgrid-footer {
+        background: #607d8b;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: medium;
+    }
+
+    .mainText {
+        padding: .25%;
+        background-color: #808080;
+        font-size: 18px;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .rowBorder {
+        border: 2px solid #337ab7;
+        border-radius: 2px;
+        padding: 2px;
+    }
+</style>
+<script>
+    function EnableButton(txt) {
+        var bt = document.getElementById('tstCase');
+        var ele = document.getElementsByTagName('input');
+
+        // Loop through each element.
+        for (i = 0; i < ele.length; i++) {
+
+            // Check the element type
+            if (ele[i].type == 'text' && ele[i].value == '') {
+                bt.disabled = true;    // Disable the button.
+                return false;
+            }
+            else {
+                bt.disabled = false;   // Enable the button.
+            }
+        }
+    }
+</script>
+@using (Html.BeginForm("Ic3TestUpdate", "Ic3Edge", FormMethod.Post))
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Test Plan Id</th>
+                <th>
+                    @*@Html.TextBoxFor(a => a.TestPlanId, new { @class = "form-control" })*@
+                    @if (Model.TestPlanId > 0)
+                    {
+                        <input type="text" id="TestPlanId" name="TestPlanId" class="form-control" value="@Model.TestPlanId" onkeyup="EnableButton(this)" />
+                    }
+                    else
+                    {
+                        <input type="text" id="TestPlanId" name="TestPlanId" class="form-control" onkeyup="EnableButton(this)" />
+                    }
+                </th>
+                <th> Test Suite Id</th>
+                <th>
+                    @*@Html.TextBoxFor(a => a.TestSuiteId, new { @class = "form-control" })*@
+                    @if (Model.TestSuiteId > 0)
+                    {
+                        <input type="text" id="TestSuiteId" name="TestSuiteId" class="form-control" value="@Model.TestSuiteId" onkeyup="EnableButton(this)" />
+                    }
+                    else
+                    {
+                        <input type="text" id="TestSuiteId" name="TestSuiteId" class="form-control" onkeyup="EnableButton(this)" />
+                    }
+                </th>
+                <th><input type="submit" id="tstCase" value="Get Test Cases" disabled="disabled" class="form-control" style="background-color:#607d8b;color:white" /></th>
+            </tr>
+        </thead>
+    </table>
+
+
+    <br />
+    if (Model != null && Model.TestCaseData != null && Model.TestDbData != null)
+    {
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    @if (Model.TestCaseData.Count > 0)
+                    {
+                        <div class="row rowBorder">
+                            <div class="col-sm-12" style="padding:0;margin:0;">
+                                <div class="mainText" id="mainTriage" style="background-color:#808080;">
+                                    Test Cases From VSO
+                                    @*<div style="font-size:small;color:yellow">SLA : SEV2-15, SEV3-30, SEV4-60 (Minutes)</div>*@
+                                </div>
+                                <div class="divScrollTta">
+                                    @{
+                                        var gridTst = new WebGrid(
+                                                            canPage: false,
+                                                            fieldNamePrefix: "test",
+                                                            canSort: true,
+                                                            ajaxUpdateContainerId: "gridTst"
+                                                            );
+
+                                        gridTst.Bind(Model.TestCaseData, autoSortAndPage: false);
+
+                                        @gridTst.GetHtml(htmlAttributes: new { id = "gridTst", name = "grTST" },
+        fillEmptyRows: false,
+        tableStyle: "table table-bordered table-hover",
+        mode: WebGridPagerModes.All,
+        headerStyle: "info",
+        footerStyle: "webgrid-footer",
+        columns: gridTst.Columns(
+        gridTst.Column("TestId", "Test Case Id"),//, format:@<text><a href="https://portal.microsofticm.com/imp/v3/incidents/details/@item.IncidentNo/home" target="_blank">@item.IncidentNo</a></text>),
+                                             //gridTst.Column("Status", "Status"),
+        gridTst.Column("LastUpdatedDate", "Last Updated"),
+        gridTst.Column("Result", "Result"),// format: @<text>@item.Title.ToString().Substring(0, (item.Title.Length > 80 ? 80 : item.Title.Length))</text>+ "..."),
+                                   //gridTst.Column("OwningContactAlias", "Owner"),
+        gridTst.Column("Title", "Title")
+        //gridTst.Column("LastUpdatedBy", "Last Updated By")//, format: item => Html.Raw("<span class=" + item.TTACategory + ">" + item.TTA + "</span>")),
+
+        )
+        )
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+                <div class="col-sm-6">
+                    @if (Model.TestDbData.Count > 0)
+                    {
+                        <div class="row rowBorder">
+                            <div class="col-sm-12" style="padding:0;margin:0;">
+                                <div class="mainText" id="mainTriage" style="background-color:#808080;">
+                                    Test Cases From Database
+                                    @*<div style="font-size:small;color:yellow">SLA : SEV2-15, SEV3-30, SEV4-60 (Minutes)</div>*@
+                                </div>
+                                <div class="divScrollTta">
+                                    @{
+                                        var gridTstDb = new WebGrid(
+                                                            canPage: false,
+                                                            fieldNamePrefix: "test",
+                                                            canSort: true,
+                                                            ajaxUpdateContainerId: "gridTstDb"
+                                                            );
+
+                                        gridTstDb.Bind(Model.TestDbData, autoSortAndPage: false);
+
+                                        @gridTstDb.GetHtml(htmlAttributes: new { id = "gridTstDb", name = "grTSTDb" },
+                                                                                                        fillEmptyRows: false,
+                                                                                                        tableStyle: "table table-bordered table-hover",
+                                                                                                        mode: WebGridPagerModes.All,
+                                                                                                        headerStyle: "info",
+                                                                                                        footerStyle: "webgrid-footer",
+                                                                                                        columns: gridTstDb.Columns(
+                                                                                                        gridTstDb.Column("TestId", "Test Id"),//, format:@<text><a href="https://portal.microsofticm.com/imp/v3/incidents/details/@item.IncidentNo/home" target="_blank">@item.IncidentNo</a></text>),
+                                                  gridTstDb.Column("Result", "Result"),// format: @<text>@item.Title.ToString().Substring(0, (item.Title.Length > 80 ? 80 : item.Title.Length))</text>+ "..."),
+                                                  gridTstDb.Column("Title", "Title"),
+                                                  gridTstDb.Column("LastUpdatedDate", "Last Updated"),
+                                                  gridTstDb.Column("IsProcessed", "Is Processed"),//, format: item => Html.Raw("<span class=" + item.TTACategory + ">" + item.TTA + "</span>")),
+                                                  gridTstDb.Column("Path", "Path")
+
+                                                  )
+                                                  )
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+
+            @if (Model.TestCaseData.Count > 0 && Model.TestDbData.Count > 0)
+            {
+                <br />
+                <input type="button" value="Update In VSO" id="btnUpdateVso" onclick="location.href='@Url.Action("UpdateTests", "Ic3Edge")'" class="form-control" style="background-color:#607d8b;color:white;margin-left:-15px" />
+            }
+            else
+            {
+                <br />
+                <input type="button" value="Update In VSO" disabled="disabled" title="Enabled when there is test data to update" id="btnUpdateVso" onclick="location.href='@Url.Action("UpdateTests", "Ic3Edge")'" class="form-control" style="background-color:#607d8b;color:white;margin-left:-15px" />
+                <div style="font-size:medium;color:red;text-align:center;"> <marquee direction="right">No test cases pending for Update</marquee></div>
+            }
+        </div>
+    }
+    <div style="font-size:medium;color:red;text-align:center;"> <marquee direction="right">@ViewBag.Error</marquee></div>
+}
+
+

@@ -1,0 +1,386 @@
+﻿@{
+    ViewBag.Title = "MSODSDashboard";
+}
+
+<style>
+    .box {
+        background-color: #8b8386;
+        border: 1px solid #0099CC;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: Roboto;
+        height: 100px;
+        width: 800px;
+        color: white;
+        margin: 10px
+    }
+
+    .mt-2 {
+        margin-top: 5px !important;
+    }
+
+    .box1 {
+        background-color: lightgrey;
+        width: 300px;
+        border: 15px solid green;
+        padding: 50px;
+        margin: 20px;
+    }
+
+    .divScroll {
+        overflow-y: auto;
+        background-color: white;
+        max-height: 42px;
+        text-align: justify;
+    }
+
+    .dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-top :4px;
+    }
+
+    .redDot {
+        background-color: red;
+    }
+
+    .greenDot {
+        background-color: green;
+    }
+
+    .orangeDot {
+        background-color: darkorange;
+    }
+
+    .metriceDiv {
+        background-color: antiquewhite;
+        color: black;
+        font-size: 12px;
+        font-weight: bold;
+        margin: 0px;
+    }
+
+    .mainText {
+        padding: .25%;
+        background-color: #607d8b;
+        font-size: 20px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .btnCustom {
+        background-color: white;
+        border-color: lightslategrey;
+    }
+
+    .threadholdTxt {
+        font-size: 12px;
+        color: white;
+        text-align: center;
+        margin-left: 2%;
+        margin-right: 1%;
+    }
+
+    .percentageText {
+        font-size: 12px;
+        padding-right: 2%;
+        color: white;
+    }
+
+    .commentSecion {
+        font-size: 16px;
+        background-color: #4d4a4a;
+        text-align: center;
+    }
+
+    .rowBorder {
+        border: 2px solid #337ab7;
+        border-radius: 2px;
+        padding: 2px;
+        margin-bottom: 10px;
+        max-width: 120%;
+    }
+
+    .colBorder {
+        border: 2px solid #337ab7;
+        border-radius: 2px;
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 5px;
+    }
+    .redDot {
+        background-color: red;
+    }
+
+    .greenDot {
+        background-color: green;
+    }
+
+    .orangeDot {
+        background-color: darkorange;
+    }
+</style>
+<meta http-equiv="refresh" content="300">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="container-fluid">
+    <div class="container-fluid" style="padding: 0%;margin-bottom:2%">
+        <div class="btn-group btn-group-justified">
+            <div class="btn-group" style="background-color: #607d8b; text-align: center;color: white;">
+                Total Duration : <span style="color:yellow;font-weight:bold">6 hours</span>
+            </div>
+            <div class="btn-group" style="background-color: #607d8b; text-align: center;color: white;">
+                Service Instances with -a : > 9990000 &nbsp;<span class="dot orangeDot"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; > 40000000 &nbsp;<span class="dot redDot"></span>
+            </div>
+            <div class="btn-group" style="background-color: #607d8b; text-align: center;color: white;">
+                Other Service Instances : > 9990000 &nbsp;<span class="dot orangeDot"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; > 10000000 &nbsp;<span class="dot redDot"></span>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="text-align: center;">
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainCTPM" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest A</div>
+                <div class="divScroll" id="CTPM" style="display:none">
+                </div>
+                @*<div class="commentSecion">
+                    <span class="threadholdTxt">Threshold</span>
+                    <span class="dot orangeDot"></span>
+                    <span class="percentageText"> >@Session["MSODSThresholdLow"] & < @Session["MSODSThresholdHigh"] </span>
+                    <span class="dot redDot"></span>
+                    <span class="percentageText"> >=@Session["MSODSThresholdHigh"] (Continuous @Session["MSODSTimeSpan"] occurances)</span>
+                </div>*@
+            </div>
+            <div class="col-sm-6 colBorder" id="mainFor1A" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 1A</div>
+                <div class="divScroll" id="For1A" style="display:none">
+                </div>
+                @*<div class="commentSecion">
+                    <span class="threadholdTxt">Threshold</span>
+                    <span class="dot orangeDot"></span>
+                    <span class="percentageText"> >@Session["MSODSThresholdLow"] & < @Session["MSODSThresholdHigh"] </span>
+                    <span class="dot redDot"></span>
+                    <span class="percentageText"> >=@Session["MSODSThresholdHigh"] (Continuous @Session["MSODSTimeSpan"] occurances)</span>
+                </div>*@
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainFor2A" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 2A</div>
+                <div class="divScroll" id="For2A" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainFor3A" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 3A</div>
+                <div class="divScroll" id="For3A" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainFor4A" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 4A</div>
+                <div class="divScroll" id="For4A" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainForB" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest B</div>
+                <div class="divScroll" id="ForB" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainFor1B" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 1B</div>
+                <div class="divScroll" id="For1B" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainForE" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest E</div>
+                <div class="divScroll" id="ForE" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainFor1E" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 1E</div>
+                <div class="divScroll" id="For1E" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainFor2E" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 2E</div>
+                <div class="divScroll" id="For2E" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainFor3E" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 3E</div>
+                <div class="divScroll" id="For3E" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainFor4E" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 4E</div>
+                <div class="divScroll" id="For4E" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainForF" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest F</div>
+                <div class="divScroll" id="ForF" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainFor0G" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 0G</div>
+                <div class="divScroll" id="For0G" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainFor1G" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 1G</div>
+                <div class="divScroll" id="For1G" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainFor2G" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 2G</div>
+                <div class="divScroll" id="For2G" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainFor0M" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 0M</div>
+                <div class="divScroll" id="For0M" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainFor1M" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest 1M</div>
+                <div class="divScroll" id="For1M" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainForAN1" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest AN1</div>
+                <div class="divScroll" id="ForAN1" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainForAU1" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest AU1</div>
+                <div class="divScroll" id="ForAU1" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainForCA1" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest CA1</div>
+                <div class="divScroll" id="ForCA1" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainForDE1" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest DE1</div>
+                <div class="divScroll" id="ForDE1" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainForED1" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest ED1</div>
+                <div class="divScroll" id="ForED1" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainForED2" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest ED2</div>
+                <div class="divScroll" id="ForED2" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainForED3" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest ED3</div>
+                <div class="divScroll" id="ForED3" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainForED4" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest ED4</div>
+                <div class="divScroll" id="ForED4" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainForED5" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest ED5</div>
+                <div class="divScroll" id="ForED5" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainForED6" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest ED6</div>
+                <div class="divScroll" id="ForED6" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainForGB1" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest GB1</div>
+                <div class="divScroll" id="ForGB1" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainForIN1" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest IN1</div>
+                <div class="divScroll" id="ForIN1" style="display:none">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 colBorder" id="mainForJP1" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest JP1</div>
+                <div class="divScroll" id="ForJP1" style="display:none">
+                </div>
+
+            </div>
+            <div class="col-sm-6 colBorder" id="mainForKR1" style="display: none;padding:2px;margin-bottom:10px">
+                <div class="mainText">Forest KR1</div>
+                <div class="divScroll" id="ForKR1" style="display:none">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loadimgDivImage" style="display: block; text-align:center">
+        <img src="~/Content/Asset/ajax-loader.gif" />
+    </div>
+</div>
+
+<script src="~/Scripts/MsOds.js"></script>

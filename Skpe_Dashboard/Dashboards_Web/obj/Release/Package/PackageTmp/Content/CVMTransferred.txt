@@ -1,0 +1,6 @@
+﻿let start= datetime(@StartDate); 
+let end= datetime(@EndDate);
+IncidentCustomFieldEntries | where TeamName in ("SBV Voice Applications" ,"Business Voice LIS" ,"Business Voice 0R Routing","Business Voice PSTN Calling")
+            and ModifiedDate >= start and ModifiedDate <= end
+           and Value in( "Need:Additional Information","Need:Fresh Repro","Need:Assistance Dual scope","Out of Scope","Misroute","Others:SpecifyReason")
+          | distinct IncidentId,Value,TeamName,ModifiedDate

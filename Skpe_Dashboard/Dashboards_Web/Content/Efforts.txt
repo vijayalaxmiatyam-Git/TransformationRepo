@@ -1,0 +1,4 @@
+﻿IncidentCustomFieldEntries
+           |where IncidentId in (@IncidentIds)
+           |where Name has ("Efforts") or Name has ("_Comments")
+           |project  IncidentId,Name,Value,CustomFieldId,TeamName

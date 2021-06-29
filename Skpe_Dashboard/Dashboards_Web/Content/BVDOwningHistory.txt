@@ -1,0 +1,21 @@
+﻿let start= datetime(@fromDate); 
+let end= datetime(@toDate);
+let SREBVDIncidents =()
+{  
+        Incidents
+        | where CreateDate >= start and CreateDate <= end and OwningTeamName in("SKYPEFORBUSINESS\\BusinessVoiceBVD")
+        | where OwningContactAlias in("v-snaru", "v-vagon", "v-saitik", "v-pujkum", "v-divya", "v-nakanc", "v-raneel", "v-sybak", "v-sudkoy", "v-erkay", "v-poden", "v-viponn", "v-bodarj", "v-vishal")
+        | summarize arg_max(ModifiedDate ,*) by IncidentId       
+        | project IncidentId              
+ };
+ let SREStoreIncidents =()
+{
+   Incidents  
+        | where CreateDate >= start and CreateDate <= end and OwningTeamName in("SKYPEFORBUSINESS\\IC3RuntimeStoreTriage")
+        | summarize arg_max(ModifiedDate ,*) by IncidentId       
+        | project IncidentId  
+ };
+ SREBVDIncidents | union SREStoreIncidents
+ | join  ( Incidents ) on IncidentId
+ | project IncidentId ,OwningTeamName,ModifiedDate,OwningContactAlias
+ | order by IncidentId,ModifiedDate asc

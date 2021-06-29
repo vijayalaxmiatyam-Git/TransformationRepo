@@ -1,0 +1,139 @@
+﻿let UTCtoPST=(UTCdate:datetime)
+{
+    UTCdate - case(UTCdate between(datetime(2018-03-11 10:00:00.0000000)..datetime(2018-11-04 10:00:00.0000000)) or UTCdate between(datetime(2019-03-10 10:00:00.0000000)..datetime(2019-11-03 10:00:00.0000000)) or UTCdate between(datetime(2020-03-08 10:00:00.0000000)..datetime(2020-11-01 10:00:00.0000000)) or UTCdate between(datetime(2021-03-14 10:00:00.0000000)..datetime(2021-11-07 10:00:00.0000000)) or UTCdate between(datetime(2022-03-13 10:00:00.0000000)..datetime(2022-11-06 10:00:00.0000000)) or UTCdate between(datetime(2023-03-12 10:00:00.0000000)..datetime(2023-11-05 10:00:00.0000000)) or UTCdate between(datetime(2024-03-10 10:00:00.0000000)..datetime(2024-11-03 10:00:00.0000000)),7h,8h)
+};
+let DataTimespan=@reqDaysd;
+// let MonthName=(MonthNo:int)
+// {
+//     iif(MonthNo==1,"Jan", iif(MonthNo==2,"Feb", iif(MonthNo==3,"Mar", iif(MonthNo==4,"Apr", iif(MonthNo==5,"May", iif(MonthNo==6,"Jun", iif(MonthNo==7,"Jul", iif(MonthNo==8,"Aug", iif(MonthNo==9,"Sep", iif(MonthNo==10,"Oct", iif(MonthNo==11,"Nov","Dec")))))))))))
+// };
+let BVDIncidents =()
+{
+    IncidentHistory
+    | where ChangeDate >= ago(DataTimespan) and OwningTeamName in("SKYPEFORBUSINESS\\BusinessVoiceBVD")
+    | distinct IncidentId, OwningTeamName
+    | join kind = inner
+    (
+        IncidentHistory
+        | project IncidentId, ChangedBy, OwningTeamName, Severity, ChangeDate,Summary
+    )
+    on IncidentId
+    | where ChangedBy in("v-snaru", "v-vagon", "v-saitik", "v-pujkum", "v-divya", "v-nakanc", "v-raneel", "v-sybak", "v-sudkoy", "v-erkay", "v-poden", "v-viponn", "v-bodarj", "v-vishal")
+    | project IncidentId, OwningTeamName, ChangeDate, ChangedBy, Severity,Summary
+    | summarize arg_max(ChangeDate ,*) by IncidentId
+};
+let BVDFinalData =()
+{
+    BVDIncidents
+    | join kind = inner
+    (
+        Incidents
+        //| where Severity == 3
+        | project SourceName, OwningContactAlias, IncidentId, OccurringDeviceName, Severity, Status, Title, CreateDate, CreateDate_UTC = CreateDate, CreateDate_PST=UTCtoPST(CreateDate), OwningTeamName, HowFixed, ResolvedBy, ModifiedDate, Keywords, OccurringEnvironment
+    )
+    on $left.IncidentId == $right.IncidentId
+    | project HistoryIncidentId = IncidentId, HistoryOwningTeamName = OwningTeamName, ChangeDate, ChangedBy, HistorySeverity = Severity, IncidentId = IncidentId, SourceName, OwningContactAlias, OccurringDeviceName, Severity, Status, Title, CreateDate, CreateDate_UTC, CreateDate_PST, OwningTeamName, HowFixed, ResolvedBy, ModifiedDate, Keywords, OccurringEnvironment,Summary
+    | summarize arg_max(ChangeDate ,*) by IncidentId
+    | project IncidentId, Severity, ModifiedDate, SourceName, OwningContactAlias, OccurringDeviceName, Status, Title, CreateDate, CreateDate_UTC, CreateDate_PST, OwningTeamName, HowFixed, ResolvedBy, Keywords, OccurringEnvironment,Summary
+};
+//BVDFinalData
+let RuntimeTriageIncidents =()
+{
+    IncidentHistory
+    | where ChangeDate >= ago(DataTimespan) and OwningTeamName in("SKYPEFORBUSINESS\\IC3RuntimeStoreTriage")
+    | distinct IncidentId
+    | join kind = inner
+    (
+        Incidents
+        | where CreateDate >= ago(DataTimespan) and OwningTenantName == "Skype For Business"
+        | project SourceName, OwningContactAlias, HistoryIncidentId=IncidentId, OccurringDeviceName, Severity, Status, Title, CreateDate, CreateDate_UTC = CreateDate, CreateDate_PST=UTCtoPST(CreateDate), OwningTeamName, HowFixed, ResolvedBy, ModifiedDate, Keywords, OccurringEnvironment 
+    ) on $left.IncidentId == $right.HistoryIncidentId
+};
+let RuntimeTriageSev2Data = ()
+{
+    RuntimeTriageIncidents
+        | where OwningTeamName in("SKYPEFORBUSINESS\\IC3RuntimeStoreTriage") and Severity == 2
+        | summarize arg_max(ModifiedDate ,*) by IncidentId
+};
+let RuntimeTriageSev3Data = ()
+{
+    RuntimeTriageIncidents
+        | where OwningTeamName in("SKYPEFORBUSINESS\\IC3RuntimeStoreTriage") and Severity == 3
+        | summarize arg_max(ModifiedDate ,*) by IncidentId
+};
+let RuntimeTriageSev4Data = ()
+{
+    RuntimeTriageIncidents
+        | where OwningTeamName in("SKYPEFORBUSINESS\\IC3RuntimeStoreTriage") and Severity == 4
+        | summarize arg_max(ModifiedDate ,*) by IncidentId
+};
+let RuntimeinalData = ()
+{
+    RuntimeTriageSev2Data
+        | union RuntimeTriageSev3Data
+        | union RuntimeTriageSev4Data
+        | summarize arg_min(Severity,*) by IncidentId
+        | project IncidentId, Severity, ModifiedDate, SourceName, OwningContactAlias, OccurringDeviceName, Status, Title, CreateDate, CreateDate_UTC, CreateDate_PST, OwningTeamName, HowFixed, ResolvedBy, Keywords, OccurringEnvironment
+};
+let SREFinalData = ()
+{
+    BVDFinalData
+    | union RuntimeinalData
+};
+let TempIncidentHistory = ()
+{
+    SREFinalData
+    | distinct IncidentId
+    | join kind = inner
+    (
+        IncidentHistory
+        | project IncidentId,HistoryId,ChangeDate,ChangeCategories,OwningTeamName,Status,OwningContactAlias,Severity,ChangedBy,Summary
+    )
+    on IncidentId
+    | project IncidentId,HistoryId,ChangeDate,ChangeCategories,OwningTeamName,Status,OwningContactAlias,ChangedBy
+};
+let AssignedDateUTC = ()
+{
+    SREFinalData
+    | distinct IncidentId
+    | join kind = inner
+    (
+        TempIncidentHistory
+        | project IncidentId,OwningTeamName,ChangeDate
+        | where OwningTeamName in("SKYPEFORBUSINESS\\BusinessVoiceBVD", "SKYPEFORBUSINESS\\IC3RuntimeStoreTriage")
+        | summarize AssignedDate_UTC = min(ChangeDate) by IncidentId
+    )
+    on IncidentId
+    | project IncidentId, AssignedDate_UTC
+};
+let EscalateDateUTC = ()
+{
+    AssignedDateUTC
+    | join kind = inner
+    (
+        TempIncidentHistory
+        | where OwningTeamName !in("SKYPEFORBUSINESS\\BusinessVoiceBVD", "SKYPEFORBUSINESS\\IC3RuntimeStoreTriage") and isnotempty(OwningTeamName)
+        | project IncidentId, OwningTeamName, ChangeDate
+    )
+    on IncidentId
+    | where ChangeDate > AssignedDate_UTC
+    | summarize EscalateDate_UTC = arg_min(ChangeDate,*) by IncidentId
+    | project IncidentId, EscalateDate_UTC, OwningTeamName
+};
+let SREIncsFinal=()
+{
+    SREFinalData
+    | join kind=leftouter
+    (
+        AssignedDateUTC
+    )
+    on IncidentId
+    | join kind=leftouter (EscalateDateUTC) on IncidentId
+};
+SREIncsFinal
+| extend Type = "Customer"
+| extend Category = "BVD Incidents"
+| project SourceName, OwningContactAlias, IncidentId, OccurringDeviceName, Severity, Status, Title, CreateDate, CreateDate_UTC, CreateDate_PST, AssignedDate_UTC, AssignedDate_PST = UTCtoPST(AssignedDate_UTC), EscalateDate_UTC, EscalateDate_PST = UTCtoPST(EscalateDate_UTC), EscalatedTeamName = OwningTeamName1, OwningTeamName, HowFixed, ResolvedBy, ModifiedDate, Type, Category, Keywords, OccurringEnvironment,Summary 
+| join ( Incidents  ) on IncidentId
+| project IncidentId ,OwningTeamName,ModifiedDate
+| order by IncidentId,ModifiedDate asc

@@ -1,0 +1,134 @@
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.deps.json
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.dll
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.dll
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.pdb
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.xml
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.pdb
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.xml
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfo.cs
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CopyComplete
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\v-sshar2\Downloads\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csprojAssemblyReference.cache
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.deps.json
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.dll
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.dll
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.pdb
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.xml
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.pdb
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.xml
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfo.cs
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CopyComplete
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Users\v-sshar2\Desktop\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csprojAssemblyReference.cache
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.deps.json
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.dll
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.dll
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.pdb
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.xml
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.pdb
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.xml
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csprojAssemblyReference.cache
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfoInputs.cache
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfo.cs
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CopyComplete
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Project\Skpe_Dashboard_update_07_02_2020\Skype_Dashboards\Skype_Dashboards\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.deps.json
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.dll
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.dll
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.pdb
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.xml
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.pdb
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.xml
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csprojAssemblyReference.cache
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfoInputs.cache
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfo.cs
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CopyComplete
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Project\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.deps.json
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.dll
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.dll
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.pdb
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.xml
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.pdb
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.xml
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csprojAssemblyReference.cache
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfo.cs
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CopyComplete
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Users\v-sshar2\Desktop\Skpe_Dashboard_update_July_06_2020\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.deps.json
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.dll
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.dll
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.pdb
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.xml
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.pdb
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.xml
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfoInputs.cache
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfo.cs
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CoreCompileInputs.cache
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CopyComplete
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+D:\Skype\MVC Converted\Skpe_Dashboard_update_07_02_2020\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csprojAssemblyReference.cache
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csprojAssemblyReference.cache
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfo.cs
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.deps.json
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_DataLayer.dll
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.dll
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.dll
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_DataLayer.pdb
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_DataLayer.dll.config
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.pdb
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.xml
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.pdb
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.xml
+C:\Users\v-viatya\Downloads\Skpe_Dashboard_11May_Latest\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CopyComplete
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.deps.json
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_DataLayer.dll
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.dll
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.dll
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_DataLayer.pdb
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Dashboards_DataLayer.dll.config
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.pdb
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Cloud.Metrics.Client.xml
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.pdb
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\bin\Debug\netstandard2.0\Microsoft.Online.Metrics.Serialization.xml
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csprojAssemblyReference.cache
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfoInputs.cache
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.AssemblyInfo.cs
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CoreCompileInputs.cache
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.csproj.CopyComplete
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.dll
+D:\Skype\MVC Converted\Skpe_Dashboard\Dashboards_BusinessLayer\obj\Debug\netstandard2.0\Dashboards_BusinessLayer.pdb

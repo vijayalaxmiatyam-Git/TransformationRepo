@@ -1,0 +1,599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{57239848-7B57-46CF-85E7-75F3EBE3DF45}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dashboards_Web</RootNamespace>
+    <AssemblyName>Dashboards_Web</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44308</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Kusto.Cloud.Platform, Version=9.0.3.0, Culture=neutral, PublicKeyToken=829a00acde12d551, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Kusto.Cloud.Platform.9.0.3\lib\net472\Kusto.Cloud.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Kusto.Data, Version=9.0.3.0, Culture=neutral, PublicKeyToken=829a00acde12d551, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Kusto.Data.9.0.3\lib\net472\Kusto.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Cloud.Metrics.Client">
+      <HintPath>..\packages\Microsoft.Cloud.Metrics.Client.2.2020.602.1739\lib\net45\Microsoft.Cloud.Metrics.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Identity.Client, Version=4.20.1.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.4.20.1\lib\net461\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=2.16.1.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.Extensions.Msal.2.16.1\lib\net45\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.2.7\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.7.1\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.7.1\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.3.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.3.5\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Online.Metrics.Serialization">
+      <HintPath>..\packages\Microsoft.Cloud.Metrics.Client.2.2020.602.1739\lib\net45\Microsoft.Online.Metrics.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.CodeDom.4.5.0\lib\net461\System.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.7.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.OleDb, Version=4.0.1.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.OleDb.4.7.1\lib\net461\System.Data.OleDb.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Claims, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Claims.4.3.0\lib\net46\System.Security.Claims.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.ProtectedData.4.4.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.7.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.ServiceModel.Routing" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc5, Version=1.4.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc5.1.4.0\lib\net45\Unity.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\BvdController.cs" />
+    <Compile Include="Controllers\CVMController.cs" />
+    <Compile Include="Controllers\Ic3EdgeController.cs" />
+    <Compile Include="Controllers\ICMHandOffController.cs" />
+    <Compile Include="Controllers\JobSchedulerController.cs" />
+    <Compile Include="Controllers\MSODS_DashboardController.cs" />
+    <Compile Include="Controllers\OnBoardingVSOController.cs" />
+    <Compile Include="Controllers\OnBoardingController.cs" />
+    <Compile Include="Controllers\OperationalDashBoardController.cs" />
+    <Compile Include="Controllers\SOCController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\TicketsHistoryController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ICMController.cs" />
+    <Compile Include="Controllers\OCDM_Health_DashboardController.cs" />
+    <Compile Include="Controllers\ServiceStatusController.cs" />
+    <Compile Include="Controllers\SkypeLibraryController.cs" />
+    <Compile Include="Controllers\VsoDataController.cs" />
+    <Compile Include="CustomAttribute\CustomExceptionAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BvdDataModel.cs" />
+    <Compile Include="Models\CvmMitigatedModel.cs" />
+    <Compile Include="Models\CvmTransferredModel.cs" />
+    <Compile Include="Models\Ic3EdgeModel.cs" />
+    <Compile Include="Models\MsodsModel.cs" />
+    <Compile Include="Models\OnBoardModel.cs" />
+    <Compile Include="Models\PipelineModel.cs" />
+    <Compile Include="Models\ReleaseModel.cs" />
+    <Compile Include="Models\SFBDataModel.cs" />
+    <Compile Include="Models\SocDataModel.cs" />
+    <Compile Include="Models\SocE911Model.cs" />
+    <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\TestCaseModel.cs" />
+    <Compile Include="Models\TicketHistoryModel.cs" />
+    <Compile Include="Models\IcmDataModel.cs" />
+    <Compile Include="Models\MachineStatusModel.cs" />
+    <Compile Include="Models\StatusModel.cs" />
+    <Compile Include="Models\TTADataModel.cs" />
+    <Compile Include="Models\TTEDataModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\TimeDuration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Asset\ajax-loader.gif" />
+    <Content Include="Content\BVDHistoryData.txt" />
+    <Content Include="Content\BVDOwningHistory.txt" />
+    <Content Include="Content\CVMDashboard.txt" />
+    <Content Include="Content\CVMTransferred.txt" />
+    <Content Include="Content\E911_Data.txt" />
+    <Content Include="Content\Efforts.txt" />
+    <Content Include="Content\DetainedTickets.txt" />
+    <Content Include="Content\ICM_ST_Query.txt" />
+    <Content Include="Content\img\!Access_64.JPG" />
+    <Content Include="Content\img\!Access_67.JPG" />
+    <Content Include="Content\img\!Access_68.JPG" />
+    <Content Include="Content\img\!Operations_18.JPG" />
+    <Content Include="Content\img\!Operations_19.JPG" />
+    <Content Include="Content\img\!Operations_20.JPG" />
+    <Content Include="Content\img\!Operations_35.JPG" />
+    <Content Include="Content\img\Access_64.JPG" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\adhoc_81.png" />
+    <Content Include="Content\img\Corp_100.PNG" />
+    <Content Include="Content\img\CVM.png" />
+    <Content Include="Content\img\dcot.PNG" />
+    <Content Include="Content\img\ITR_Sche_89.png" />
+    <Content Include="Content\img\CRC_79.png" />
+    <Content Include="Content\img\Dedicate_80.jpg" />
+    <Content Include="Content\img\gdco_91.PNG" />
+    <Content Include="Content\img\Jarvis.jpg" />
+    <Content Include="Content\img\msasset_105.jpg" />
+    <Content Include="Content\img\Msr_106.png" />
+    <Content Include="Content\img\OneAsset_96.PNG" />
+    <Content Include="Content\img\Patch.png" />
+    <Content Include="Content\img\phynet.PNG" />
+    <Content Include="Content\img\PowerBI_82.png" />
+    <Content Include="Content\img\SAS_Web.PNG" />
+    <Content Include="Content\img\SBS.png" />
+    <Content Include="Content\img\SBS_93.png" />
+    <Content Include="Content\img\SD.jpg" />
+    <Content Include="Content\img\ServiceStatus.png" />
+    <Content Include="Content\img\sfb_107.jpg" />
+    <Content Include="Content\img\sharepoint.png" />
+    <Content Include="Content\img\SOC.png" />
+    <Content Include="Content\img\Template_95.jpg" />
+    <Content Include="Content\img\wiki_1.jpg" />
+    <Content Include="Content\img\wiki_10.jpg" />
+    <Content Include="Content\img\wiki_11.gif" />
+    <Content Include="Content\img\wiki_12.PNG" />
+    <Content Include="Content\img\wiki_13.jpg" />
+    <Content Include="Content\img\wiki_14.jpg" />
+    <Content Include="Content\img\wiki_15.png" />
+    <Content Include="Content\img\wiki_16.jpg" />
+    <Content Include="Content\img\wiki_17.jpg" />
+    <Content Include="Content\img\wiki_18.jpg" />
+    <Content Include="Content\img\wiki_2.jpg" />
+    <Content Include="Content\img\wiki_3.jpg" />
+    <Content Include="Content\img\wiki_4.gif" />
+    <Content Include="Content\img\wiki_5.PNG" />
+    <Content Include="Content\img\wiki_6.png" />
+    <Content Include="Content\img\wiki_7.jpg" />
+    <Content Include="Content\img\wiki_8.jpg" />
+    <Content Include="Content\img\wiki_9.jpg" />
+    <Content Include="Content\LoadSpin.css" />
+    <Content Include="Content\OCDMHistoryData.txt" />
+    <Content Include="Content\Sev2Incidents.txt" />
+    <Content Include="Content\SOCDashboard.txt" />
+    <Content Include="Content\TicketOwningHistory.txt" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\img\Access_65.JPG" />
+    <Content Include="Content\img\Access_66.JPG" />
+    <Content Include="Content\img\Access_67.JPG" />
+    <Content Include="Content\img\Access_68.JPG" />
+    <Content Include="Content\img\Access_69.JPG" />
+    <Content Include="Content\img\cs1.jpg" />
+    <Content Include="Content\img\Dashoboard_73.JPG" />
+    <Content Include="Content\img\Dashoboard_74.JPG" />
+    <Content Include="Content\img\Generic_70.JPG" />
+    <Content Include="Content\img\Generic_71.JPG" />
+    <Content Include="Content\img\Generic_72.JPG" />
+    <Content Include="Content\img\Operations_100.JPG" />
+    <Content Include="Content\img\Operations_18.JPG" />
+    <Content Include="Content\img\Operations_19.JPG" />
+    <Content Include="Content\img\Operations_20.JPG" />
+    <Content Include="Content\img\Operations_21.JPG" />
+    <Content Include="Content\img\Operations_22.JPG" />
+    <Content Include="Content\img\Operations_23.JPG" />
+    <Content Include="Content\img\Operations_24.JPG" />
+    <Content Include="Content\img\Operations_25.JPG" />
+    <Content Include="Content\img\Operations_26.JPG" />
+    <Content Include="Content\img\Operations_27.JPG" />
+    <Content Include="Content\img\Operations_28.JPG" />
+    <Content Include="Content\img\Operations_29.JPG" />
+    <Content Include="Content\img\Operations_30.JPG" />
+    <Content Include="Content\img\Operations_31.JPG" />
+    <Content Include="Content\img\Operations_32.JPG" />
+    <Content Include="Content\img\Operations_33.JPG" />
+    <Content Include="Content\img\Operations_34.JPG" />
+    <Content Include="Content\img\Operations_35.JPG" />
+    <Content Include="Content\img\Operations_36.JPG" />
+    <Content Include="Content\img\Operations_37.JPG" />
+    <Content Include="Content\img\Operations_38.JPG" />
+    <Content Include="Content\img\Operations_39.JPG" />
+    <Content Include="Content\img\Operations_40.JPG" />
+    <Content Include="Content\img\Operations_41.JPG" />
+    <Content Include="Content\img\Operations_42.JPG" />
+    <Content Include="Content\img\Operations_43.JPG" />
+    <Content Include="Content\img\Operations_44.JPG" />
+    <Content Include="Content\img\Operations_45.JPG" />
+    <Content Include="Content\img\Operations_46.JPG" />
+    <Content Include="Content\img\Operations_47.JPG" />
+    <Content Include="Content\img\Operations_48.JPG" />
+    <Content Include="Content\img\Operations_49.JPG" />
+    <Content Include="Content\img\Operations_50.JPG" />
+    <Content Include="Content\img\Operations_51.JPG" />
+    <Content Include="Content\img\Operations_52.JPG" />
+    <Content Include="Content\img\Operations_53.JPG" />
+    <Content Include="Content\img\Operations_54.JPG" />
+    <Content Include="Content\img\Operations_55.JPG" />
+    <Content Include="Content\img\Operations_56.JPG" />
+    <Content Include="Content\img\Operations_57.JPG" />
+    <Content Include="Content\img\Operations_58.JPG" />
+    <Content Include="Content\img\Operations_59.JPG" />
+    <Content Include="Content\img\Operations_60.JPG" />
+    <Content Include="Content\img\Operations_61.JPG" />
+    <Content Include="Content\img\Operations_62.JPG" />
+    <Content Include="Content\img\Operations_63.JPG" />
+    <Content Include="Content\img\Training_1.JPG" />
+    <Content Include="Content\img\Training_10.JPG" />
+    <Content Include="Content\img\Training_11.JPG" />
+    <Content Include="Content\img\Training_12.JPG" />
+    <Content Include="Content\img\Training_13.JPG" />
+    <Content Include="Content\img\Training_14.JPG" />
+    <Content Include="Content\img\Training_15.JPG" />
+    <Content Include="Content\img\Training_16.JPG" />
+    <Content Include="Content\img\Training_17.JPG" />
+    <Content Include="Content\img\Training_2.JPG" />
+    <Content Include="Content\img\Training_3.JPG" />
+    <Content Include="Content\img\Training_4.JPG" />
+    <Content Include="Content\img\Training_5.JPG" />
+    <Content Include="Content\img\Training_6.JPG" />
+    <Content Include="Content\img\Training_7.JPG" />
+    <Content Include="Content\img\Training_8.JPG" />
+    <Content Include="Content\img\Training_9.JPG" />
+    <Content Include="Content\Uploads\VSO_Data.xlsx" />
+    <None Include="Properties\PublishProfiles\SFBHealthToolKit - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\SFBHealthToolKit - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\SFBHealthToolKit - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\MsOds.js" />
+    <Content Include="Scripts\ocdm.js" />
+    <Content Include="Content\ICM_SRE_Query.txt" />
+    <Content Include="Scripts\OpDashboard.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\OCDM_Health_Dashboard\Health_Dashboard.cshtml" />
+    <Content Include="Views\Shared\PageNotFound.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\CustomError.cshtml" />
+    <Content Include="Views\ServiceStatus\ServiceStatus.cshtml" />
+    <Content Include="Views\ICM\SREIncidents.cshtml" />
+    <Content Include="Views\TicketsHistory\TicketsHistory.cshtml" />
+    <Content Include="Views\SkypeLibrary\SkypeLibrary.cshtml" />
+    <Content Include="Views\Task\Imaging.cshtml" />
+    <Content Include="Views\VsoData\Index.cshtml" />
+    <Content Include="Views\Home\ChatBot.cshtml" />
+    <Content Include="Views\ICM\SDIncidents.cshtml" />
+    <Content Include="Views\ICMHandOff\HandOffReport.cshtml" />
+    <Content Include="Views\SkypeLibrary\SFBLibrary.cshtml" />
+    <Content Include="Views\CVM\CvmHome.cshtml" />
+    <Content Include="Views\CVM\CvmMitigated.cshtml" />
+    <Content Include="Views\OperationalDashBoard\OperationalDashBoard.cshtml" />
+    <Content Include="Views\CVM\CvmTransferred.cshtml" />
+    <Content Include="Views\MSODS_Dashboard\MSODSDashboard.cshtml" />
+    <Content Include="Views\SOC\SOCHandOffReport.cshtml" />
+    <Content Include="Views\SOC\SocHome.cshtml" />
+    <Content Include="Views\ICMHandOff\SDHandOffReport.cshtml" />
+    <Content Include="Views\SOC\E911Dashboard.cshtml" />
+    <Content Include="Views\ICMHandOff\SREHandOffReport.cshtml" />
+    <Content Include="Views\ICM\ITARIncidents.cshtml" />
+    <Content Include="Views\OnBoarding\OnBoarding.cshtml" />
+    <Content Include="Views\OnBoardingVSO\OnBoardingVSO.cshtml" />
+    <Content Include="Views\OnBoarding\ServiceOnBoard.cshtml" />
+    <Content Include="Views\OnBoardingVSO\OnBoardingService.cshtml" />
+    <Content Include="Views\JobScheduler\JobScheduler.cshtml" />
+    <Content Include="Views\Bvd\BVDReleases.cshtml" />
+    <Content Include="Views\Ic3Edge\Ic3TestUpdate.cshtml" />
+    <Content Include="Views\Ic3Edge\Ic3BuildReleases.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dashboards_BusinessLayer\Dashboards_BusinessLayer.csproj">
+      <Project>{31cc3e8c-8f28-4163-b4f4-50815edb5fd8}</Project>
+      <Name>Dashboards_BusinessLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59213</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44308/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

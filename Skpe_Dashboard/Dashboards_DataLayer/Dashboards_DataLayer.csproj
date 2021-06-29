@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Kusto.Data" Version="9.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Data.OleDb" Version="4.7.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Kusto.Cloud.Platform">
+      <HintPath>..\..\..\Skype_SRE_Dashboard\bin\Kusto.Cloud.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Kusto.Cloud.Platform.Azure">
+      <HintPath>..\..\..\Skype_SRE_Dashboard\bin\Kusto.Cloud.Platform.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Kusto.Data">
+      <HintPath>..\..\..\Skype_SRE_Dashboard\bin\Kusto.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Kusto.Ingest">
+      <HintPath>..\..\..\Skype_SRE_Dashboard\bin\Kusto.Ingest.dll</HintPath>
+    </Reference>
+    <Reference Include="Kusto.Language">
+      <HintPath>..\..\..\Skype_SRE_Dashboard\bin\Kusto.Language.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Cloud.Metrics.Client">
+      <HintPath>..\packages\Microsoft.Cloud.Metrics.Client.2.2020.602.1739\lib\net45\Microsoft.Cloud.Metrics.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Online.Metrics.Serialization">
+      <HintPath>..\packages\Microsoft.Cloud.Metrics.Client.2.2020.602.1739\lib\net45\Microsoft.Online.Metrics.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\..\Skype_SRE_Dashboard\bin\System.Web.Optimization.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

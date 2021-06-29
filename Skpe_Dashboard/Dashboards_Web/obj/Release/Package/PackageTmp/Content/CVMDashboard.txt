@@ -1,0 +1,116 @@
+﻿let UTCtoPST=(UTCdate:datetime)
+{
+    UTCdate - case(UTCdate between(datetime(2018-03-11 10:00:00.0000000)..datetime(2018-11-04 10:00:00.0000000)) or UTCdate between(datetime(2019-03-10 10:00:00.0000000)..datetime(2019-11-03 10:00:00.0000000)) or UTCdate between(datetime(2020-03-08 10:00:00.0000000)..datetime(2020-11-01 10:00:00.0000000)) or UTCdate between(datetime(2021-03-14 10:00:00.0000000)..datetime(2021-11-07 10:00:00.0000000)) or UTCdate between(datetime(2022-03-13 10:00:00.0000000)..datetime(2022-11-06 10:00:00.0000000)) or UTCdate between(datetime(2023-03-12 10:00:00.0000000)..datetime(2023-11-05 10:00:00.0000000)) or UTCdate between(datetime(2024-03-10 10:00:00.0000000)..datetime(2024-11-03 10:00:00.0000000)),7h,8h)
+};
+let DataTimespan=90d;
+// let MonthName=(MonthNo:int)
+// {
+//     iif(MonthNo==1,"Jan", iif(MonthNo==2,"Feb", iif(MonthNo==3,"Mar", iif(MonthNo==4,"Apr", iif(MonthNo==5,"May", iif(MonthNo==6,"Jun", iif(MonthNo==7,"Jul", iif(MonthNo==8,"Aug", iif(MonthNo==9,"Sep", iif(MonthNo==10,"Oct", iif(MonthNo==11,"Nov","Dec")))))))))))
+// }; 
+let CVMIncidents=()
+    {
+        Incidents 
+        | where CreateDate >= ago(DataTimespan)  and OwningTeamName in("SKYPEFORBUSINESS\\BusinessVoicePSTNCalling","SKYPEFORBUSINESS\\SBVVoiceApplications", "SKYPEFORBUSINESS\\BusinessVoiceLIS") 
+        | distinct IncidentId 
+        | join kind = inner 
+            ( Incidents 
+                | where CreateDate >= ago(DataTimespan) and IncidentType == "CustomerReported"  
+                | project SourceName, OwningContactAlias, HistoryIncidentId=IncidentId, OccurringDeviceName, Severity, Status, Title, CreateDate_UTC = CreateDate, CreateDate_PST=UTCtoPST(CreateDate), OwningTeamName, Keywords, HowFixed, ResolvedBy, ModifiedDate, RoutingId, IncidentType, MitigatedBy ) on $left.IncidentId == $right.HistoryIncidentId 
+                | where OwningTeamName in("SKYPEFORBUSINESS\\BusinessVoicePSTNCalling","SKYPEFORBUSINESS\\SBVVoiceApplications", "SKYPEFORBUSINESS\\BusinessVoiceLIS"
+            ) 
+        | summarize arg_max(ModifiedDate,*) by IncidentId 
+        | project IncidentId, ModifiedDate, SourceName, OwningContactAlias, HistoryIncidentId, OccurringDeviceName, Severity, Status, Title, CreateDate_UTC, CreateDate_PST, OwningTeamName, Keywords, HowFixed, ResolvedBy, MitigatedBy,RoutingId, IncidentType 
+    }; 
+    let TempIncidentHistory=() 
+    { 
+        CVMIncidents 
+        | distinct IncidentId 
+        | join kind = inner 
+            ( IncidentHistory 
+                | project IncidentId,ChangeDate,ChangeCategories,OwningTeamName,Status,OwningContactAlias,ChangedBy 
+            ) on IncidentId
+        | project IncidentId,ChangeDate,ChangeCategories,OwningTeamName,Status,OwningContactAlias,ChangedBy 
+    }; 
+    let AssignedDateUTC1=() 
+    { 
+        CVMIncidents | distinct IncidentId 
+        | join kind = inner 
+            ( TempIncidentHistory 
+                | project IncidentId,OwningTeamName,ChangeDate 
+                | where OwningTeamName in("SKYPEFORBUSINESS\\BusinessVoicePSTNCalling","SKYPEFORBUSINESS\\SBVVoiceApplications", "SKYPEFORBUSINESS\\BusinessVoiceLIS") 
+                | summarize AssignedDate_UTC = min(ChangeDate) by IncidentId 
+            ) on IncidentId | project IncidentId, AssignedDate_UTC 
+    }; 
+    let AcknowledgeDateUTC1=() 
+    { 
+        AssignedDateUTC1 | join kind = inner ( TempIncidentHistory ) on IncidentId
+        | where ChangeDate >= AssignedDate_UTC and ChangeCategories has "AssignContact" 
+        | summarize AcknowledgeDate_UTC = min(ChangeDate) by IncidentId, ChangedBy 
+        | project IncidentId, AcknowledgeDate_UTC, ChangedBy | summarize arg_min(AcknowledgeDate_UTC, *) by IncidentId 
+        | project IncidentId, AcknowledgeDate_UTC, AckBy = ChangedBy 
+    };
+    let TimeToRespondUTC1=() 
+    { 
+        AcknowledgeDateUTC1 | join kind = inner ( TempIncidentHistory ) on IncidentId 
+        | where ChangeDate > AcknowledgeDate_UTC | summarize TimeToRespond_UTC = min(ChangeDate) by IncidentId 
+        | project IncidentId, TimeToRespond_UTC | summarize arg_min(TimeToRespond_UTC, *) by IncidentId | project IncidentId, TimeToRespond_UTC 
+    }; 
+   //  let EscalateDateUTC1=() 
+//     { 
+//         AssignedDateUTC1 
+//         | join kind = inner 
+//             ( TempIncidentHistory 
+//                 | where OwningTeamName !in("SKYPEFORBUSINESS\\BusinessVoicePSTNCalling","SKYPEFORBUSINESS\\SBVVoiceApplications", "SKYPEFORBUSINESS\\BusinessVoiceLIS") and ChangeCategories contains "AssignTeam" 
+//             ) on IncidentId | where ChangeDate > AssignedDate_UTC 
+//         | summarize EscalateDate_UTC = arg_min(ChangeDate,*) by IncidentId 
+//         | project IncidentId, EscalateDate_UTC, EscalatedTeam = OwningTeamName
+//     }; 
+//     let MitigateDateUTC1=() 
+//     { 
+//         AssignedDateUTC1 | join kind = inner ( TempIncidentHistory ) on IncidentId 
+//         | where Status in ("MITIGATED") and ChangeDate >= AssignedDate_UTC 
+//         | summarize MitigateDate_UTC = arg_min(ChangeDate,*) by IncidentId 
+//         | project IncidentId, MitigateDate_UTC, IncidentMitigatedBy = ChangedBy 
+//     }; 
+//     let ResolveDateUTC1=() 
+//     { 
+//         AssignedDateUTC1 | join kind = inner ( TempIncidentHistory ) on IncidentId 
+//         | where Status in ("RESOLVED") and ChangeDate >= AssignedDate_UTC 
+//         | summarize ResolveDate_UTC = arg_min(ChangeDate,*) by IncidentId 
+//         | project IncidentId, ResolveDate_UTC, IncidentResolvedBy = ChangedBy 
+//     }; 
+    let CVMFinal=() 
+    { 
+        CVMIncidents 
+        | join kind=leftouter ( AssignedDateUTC1 ) on IncidentId 
+        | join kind=leftouter ( AcknowledgeDateUTC1 ) on IncidentId 
+        | join kind=leftouter ( TimeToRespondUTC1 ) on IncidentId 
+        // | join kind=leftouter ( EscalateDateUTC1 ) on IncidentId 
+//         | join kind=leftouter ( MitigateDateUTC1 ) on IncidentId
+//         | join kind=leftouter ( ResolveDateUTC1 ) on IncidentId 
+        | project IncidentId, SourceName, OwningContactAlias, OccurringDeviceName, OwningTeamName, Severity, Status, Title, RoutingId, Keywords, HowFixed, ResolvedBy, MitigatedBy, IncidentType, CreateDate_UTC, CreateDate_PST, AssignedDate_PST=UTCtoPST(AssignedDate_UTC),AssignedDate_UTC, AcknowledgeDate_UTC,AcknowledgeDate_PST=UTCtoPST(AcknowledgeDate_UTC), AckBy, TimeToRespond_PST = UTCtoPST(TimeToRespond_UTC)//, EscalateDate_PST = UTCtoPST(EscalateDate_UTC), EscalatedTeam, MitigateDate_PST=UTCtoPST(MitigateDate_UTC), IncidentMitigatedBy, ResolveDate_PST=UTCtoPST(ResolveDate_UTC), IncidentResolvedBy 
+    }; 
+   //  let WALSDaily=() 
+//     { 
+//         CVMFinal | where CreateDate_UTC >= ago(5d) 
+//         | extend Aggregation="Daily" | extend Period=strcat(MonthName(datetime_part("Month",CreateDate_PST)),"-",datetime_part("Day",CreateDate_PST)) | extend StartDate=startofday(CreateDate_PST) | extend EndDate=endofday(CreateDate_PST) 
+//     }; 
+   //  let WALSWeekly=() 
+//     { 
+//         CVMFinal | where CreateDate_UTC >= ago(35d) | extend Aggregation="Weekly" 
+//         | extend Period = strcat(MonthName(datetime_part("Month",startofweek(CreateDate_PST+1d)-1d))," ",datetime_part("Day",startofweek(CreateDate_PST+1d)-1d)," - ",MonthName(datetime_part("Month",endofweek(CreateDate_PST+1d)-1d))," ",datetime_part("Day",endofweek(CreateDate_PST+1d)-1d))
+//         | extend StartDate=startofweek(CreateDate_PST+1d)-1d | extend EndDate=endofweek(CreateDate_PST+1d)-1d 
+//     }; 
+    let WALSMonthly=() 
+    { 
+        CVMFinal 
+       // | extend Aggregation="Monthly" | extend Period=strcat(MonthName(datetime_part("Month",CreateDate_PST)),"-",tostring(datetime_part("Year",CreateDate_PST))) 
+        | extend StartDate=startofmonth(CreateDate_PST) 
+        | extend EndDate=endofmonth(CreateDate_PST) 
+    };
+    // WALSDaily 
+    // | union WALSWeekly 
+    WALSMonthly 
+    | where Status =="ACTIVE" and Severity > 2
+    | project IncidentId, AssignedDate_UTC, AcknowledgeDate_UTC, AckBy
+    //| project IncidentId, StartDate, OwningTeamName, AcknowledgeDate_UTC,Severity, Status, Title, EndDate,  SourceName, OwningContactAlias, OccurringDeviceName, RoutingId, Keywords, HowFixed, ResolvedBy, MitigatedBy, IncidentType, CreateDate_UTC, CreateDate_PST, AssignedDate_PST, AcknowledgeDate_PST, AckBy, TimeToRespond_PST, EscalateDate_PST, EscalatedTeam, MitigateDate_PST, IncidentMitigatedBy, ResolveDate_PST, IncidentResolvedBy

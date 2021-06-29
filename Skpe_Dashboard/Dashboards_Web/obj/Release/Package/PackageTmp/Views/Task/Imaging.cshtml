@@ -1,0 +1,151 @@
+﻿@using System.Data;
+@model List<Dashboards_Web.Models.TaskModel>
+@{
+    ViewBag.Title = "Imaging Data";
+}
+
+<script type="text/javascript">
+    function DumpDataToDb() {
+        //$.getJSON('/Task/DumpData/', function (data) {
+        //    alert(data);
+        //});
+        $("#loadimgDivImage").toggle();
+        $.ajax({
+
+            url: '/Task/DumpData/',
+            type: 'GET',
+            //data: {
+            //    'numberOfWords': 10
+            //},
+            dataType: 'json',
+            success: function (data) {
+                
+                $("#divMsg").html(data.Status);
+            },
+            error: function (data) {
+                //alert("Request: " + JSON.stringify(data));
+            },
+            failure: function (response) {
+                $("#divMsg").html(response.responseText);
+            }
+        });
+
+       // $("#loadimgDivImage").toggle();
+    }
+</script>
+<style>
+    .rowBorder {
+        border: 2px solid #337ab7;
+        border-radius: 2px;
+        padding: 2px;
+    }
+
+    .info th {
+        background: #607d8b !important;
+    }
+
+    .info th {
+        color: white;
+        font-weight: bold;
+        font-size: medium;
+    }
+
+    .webgrid-footer {
+        background: #607d8b;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: medium;
+    }
+
+    .divScroll {
+        overflow-y: auto;
+        background-color: white;
+        max-height: 560px;
+        text-align: justify;
+    }
+    .center {
+        z-index: 1000;
+        /*margin: 50px auto;*/
+        padding: 10px;
+        width: 130px;
+        /*background-color: White;*/
+        border-radius: 10px;
+        opacity: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -50px 0px 0px -50px;
+    }
+</style>
+@using (Html.BeginForm("Imaging", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="container-fluid">
+    <table>
+        <tr>
+            <td>
+                @*<input type="file" id="FileUpload1" name="FileUpload1" class="btn btn-success"  />*@
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="FileUpload1" name="FileUpload1">
+                    @*<label class="custom-file-label" for="customFile">Choose Excel file</label>*@
+                </div>
+            </td>
+            <td>
+                <input type="submit" class="btn btn-success" style="background-color:#607d8b" id="Submit" name="Submit" value="Submit" />
+            </td>
+        </tr>
+    </table>
+    <div id="loadimgDivImage" style="display: none; text-align:center">
+        <div class="center">
+            <img src="~/Content/Asset/ajax-loader.gif" />
+        </div>
+    </div>
+    @*<label style="color:red">@ViewBag.Msg</label>*@
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="row rowBorder" id="rowDiv" style="margin-top:5px;margin-bottom:5px;">
+            <div class="col-sm-12" style="padding: 0; margin: 0;">
+                <div class="divScroll">
+                    @{
+                        var gridTask = new WebGrid(
+                                            canPage: false,
+                                            fieldNamePrefix: "tktTask",
+                                            canSort: false,
+                                            ajaxUpdateContainerId: "gridTask"
+                                            );
+
+                        gridTask.Bind(Model, autoSortAndPage: false);
+
+
+                        @gridTask.GetHtml(htmlAttributes: new { id = "gridTask" },
+                                                      fillEmptyRows: false,
+                                                      tableStyle: "table table-bordered table-hover",
+                                                      mode: WebGridPagerModes.All,
+                                                      headerStyle: "info",
+                                                      footerStyle: "webgrid-footer",
+                                                      columns: gridTask.Columns(
+                                                      gridTask.Column("Id", "Task No."),//, format:@<text><a href="https://portal.microsofticm.com/imp/v3/incidents/details/@item.IncidentId/home" target="_blank">@item.IncidentId</a></text>, canSort: true),
+                 gridTask.Column("CreatedDate", "Created Date"),
+                 gridTask.Column("Title", "Title", format: @<text>@item.Title.ToString().Substring(0, (item.Title.Length > 60 ? 60 : item.Title.Length))</text>+ "..."),
+gridTask.Column("Machines", "Machine Name(s)"),
+gridTask.Column("State", "Status")
+
+)
+);
+                    }
+                </div>
+            </div>
+        </div>
+        <div><input type="button" class="btn btn-success" style="background-color:#607d8b" id="btnDmp" name="btnDmp" value="Dump Data" onclick="DumpDataToDb()" /></div>
+        <div style="font-size:medium;color:red;" id="divMsg">  </div>
+
+    }
+    else
+    {
+        <div style="font-size:medium;color:red;"> @ViewBag.Error</div>
+    }
+</div>
+}
+
+
+
